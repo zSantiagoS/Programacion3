@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class Eventos {
 
@@ -9,12 +10,15 @@ public class Eventos {
     private Date fechaEvento;
     private String lugar;
     private ArrayList<String> artistas;
+    private Map<Categorias, Double> precioBoletas;
 
-    public Eventos(String nombreEvento, Date fechaEvento, String lugar, ArrayList<String> artistas) {
+    public Eventos(String nombreEvento, Date fechaEvento, String lugar, ArrayList<String> artistas,
+            Map<Categorias, Double> precioBoletas) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
         this.lugar = lugar;
         this.artistas = artistas;
+        this.precioBoletas = precioBoletas;
     }
 
     public String getNombreEvento() {
@@ -31,6 +35,10 @@ public class Eventos {
 
     public ArrayList<String> getArtistas() {
         return artistas;
+    }
+
+    public Map<Categorias, Double> getPrecioBoletas() {
+        return precioBoletas;
     }
 
     public void setFechaEvento(Date fechaEvento) {
