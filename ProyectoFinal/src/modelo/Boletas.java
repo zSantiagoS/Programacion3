@@ -1,4 +1,4 @@
-package modelo;
+
 
 public class Boletas {
     private Categorias categoria;

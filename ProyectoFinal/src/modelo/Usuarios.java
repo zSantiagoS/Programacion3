@@ -1,5 +1,3 @@
-package modelo;
-
 public class Usuarios {
 
     private String nombre;
