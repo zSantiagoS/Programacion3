@@ -1,11 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminScreen extends JFrame {
-    private JButton registerLocationButton;
-    private JButton registerEventButton;
-    private JButton openTaquillaButton;
-    private JButton closeTaquillaButton;
 
     public AdminScreen() {
         setTitle("Panel de Administración");
@@ -27,37 +25,59 @@ public class AdminScreen extends JFrame {
         gbc.gridwidth = 2;
         panel.add(titleLabel, gbc);
 
-        gbc.gridwidth = 1;
-
-        registerLocationButton = new JButton("Registrar Localización");
-        registerLocationButton.setBackground(new Color(33, 150, 243));
-        registerLocationButton.setForeground(Color.WHITE);
+        JButton registerLocationButton = createStyledButton("Registrar Localización");
+        registerLocationButton.addActionListener(e -> showRegisterLocationScreen());
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(registerLocationButton, gbc);
 
-        registerEventButton = new JButton("Registrar Evento");
-        registerEventButton.setBackground(new Color(33, 150, 243));
-        registerEventButton.setForeground(Color.WHITE);
+        JButton registerEventButton = createStyledButton("Registrar Evento");
+        registerEventButton.addActionListener(e -> showRegisterEventScreen());
         gbc.gridy = 2;
         panel.add(registerEventButton, gbc);
 
-        openTaquillaButton = new JButton("Abrir Taquilla");
-        openTaquillaButton.setBackground(new Color(33, 150, 243));
-        openTaquillaButton.setForeground(Color.WHITE);
+        JButton openTaquillaButton = createStyledButton("Abrir Taquilla");
+        openTaquillaButton.addActionListener(e -> showOpenTaquillaScreen());
         gbc.gridy = 3;
         panel.add(openTaquillaButton, gbc);
 
-        closeTaquillaButton = new JButton("Cerrar Taquilla");
-        closeTaquillaButton.setBackground(new Color(33, 150, 243));
-        closeTaquillaButton.setForeground(Color.WHITE);
+        JButton closeTaquillaButton = createStyledButton("Cerrar Taquilla");
+        closeTaquillaButton.addActionListener(e -> showCloseTaquillaScreen());
         gbc.gridy = 4;
         panel.add(closeTaquillaButton, gbc);
 
         add(panel);
     }
 
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setBackground(new Color(33, 150, 243));
+        button.setForeground(Color.WHITE);
+        return button;
+    }
+
+    private void showRegisterLocationScreen() {
+        RegisterLocationView registerLocationView = new RegisterLocationView();
+        registerLocationView.setVisible(true);
+    }
+
+    private void showRegisterEventScreen() {
+        RegisterEventView registerEventView = new RegisterEventView();
+        registerEventView.setVisible(true);
+    }
+
+    private void showOpenTaquillaScreen() {
+        OpenTaquillaView openTaquillaView = new OpenTaquillaView();
+        openTaquillaView.setVisible(true);
+    }
+
+    private void showCloseTaquillaScreen() {
+        CloseTaquillaView closeTaquillaView = new CloseTaquillaView();
+        closeTaquillaView.setVisible(true);
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AdminScreen().setVisible(true));
     }
 }
+
