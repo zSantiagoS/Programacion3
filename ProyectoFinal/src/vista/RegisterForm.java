@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class RegisterForm extends JFrame {
     private JTextField nameField;
@@ -29,12 +28,13 @@ public class RegisterForm extends JFrame {
 
         // Estilo del botón
         registerButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        registerButton.setBackground(new Color(76, 175, 80));
+        registerButton.setBackground(new Color(33, 150, 243));
         registerButton.setForeground(Color.WHITE);
         registerButton.setFocusPainted(false);
 
         // Crear un panel para los campos de texto
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
+        fieldsPanel.setBackground(new Color(240, 240, 240));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -62,11 +62,13 @@ public class RegisterForm extends JFrame {
 
         // Crear un panel para el botón
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(240, 240, 240));
         buttonPanel.add(registerButton);
 
         // Crear el panel principal y agregar los sub-paneles
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBackground(new Color(240, 240, 240));
         mainPanel.add(fieldsPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 

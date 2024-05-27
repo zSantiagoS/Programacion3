@@ -6,18 +6,19 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Menú Inicial");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(400, 200);
+            frame.setSize(400, 300);
             frame.setLocationRelativeTo(null);
             frame.setLayout(new BorderLayout());
+            frame.getContentPane().setBackground(new Color(240, 240, 240));
 
             JPanel panel = new JPanel(new GridBagLayout());
-            panel.setBackground(new Color(240, 240, 240));
+            panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(10, 10, 10, 10);
             gbc.fill = GridBagConstraints.HORIZONTAL;
 
-            JLabel titleLabel = new JLabel("Seleccione una opción:");
-            titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            JLabel titleLabel = new JLabel("Bienvenido", SwingConstants.CENTER);
+            titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
             titleLabel.setForeground(new Color(33, 150, 243));
             gbc.gridx = 0;
             gbc.gridy = 0;
