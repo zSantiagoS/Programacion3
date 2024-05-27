@@ -2,12 +2,12 @@ public class Usuarios {
 
     private String nombre;
     private String correo;
-    private String contraseña;
+    private String contrasena;
 
-    public Usuarios(String nombre, String correo, String contraseña) {
+    public Usuarios(String nombre, String correo, String contrasena) {
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
     
@@ -28,12 +28,12 @@ public class Usuarios {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
 }
