@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -63,10 +62,5 @@ public class Main {
         // Aquí iría la lógica para abrir la pantalla de login/registro de usuario
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.setVisible(true);
-    }
-}
-
-        // Apagar el executor cuando todas las tareas estén completas
-        executor.shutdown();
     }
 }
