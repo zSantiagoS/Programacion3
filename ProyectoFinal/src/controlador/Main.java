@@ -61,6 +61,7 @@ public class Main {
     private static void openLoginRegister() {
         // Aquí iría la lógica para abrir la pantalla de login/registro de usuario
         LoginScreen loginScreen = new LoginScreen();
+        new LoginController(loginScreen);
         loginScreen.setVisible(true);
     }
 }

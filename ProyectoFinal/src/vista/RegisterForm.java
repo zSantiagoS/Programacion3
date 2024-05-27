@@ -8,10 +8,16 @@ public class RegisterForm extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
     private JButton registerButton;
+    private LoginController loginController;
 
     public RegisterForm() {
+        super();
+    }
+
+    public RegisterForm(LoginController loginController) {
+        this.loginController = loginController;
         setTitle("Registro de Usuario");
-        setSize(400, 300);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -75,8 +81,15 @@ public class RegisterForm extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                // Aquí puedes agregar el código para registrar al usuario
+                /// Crear un nuevo usuario
+                Usuarios nuevoUsuario = new Usuarios(name, email, password);
+                loginController.addUsuario(nuevoUsuario);
+
+                // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(null, "Registro exitoso para " + name);
+
+                // Opcional: cerrar la ventana de registro
+                dispose();
             }
         });
     }

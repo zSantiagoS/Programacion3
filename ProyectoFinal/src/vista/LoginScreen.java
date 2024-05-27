@@ -57,7 +57,28 @@ public class LoginScreen extends JFrame {
         add(panel);
     }
 
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    public JButton getRegisterButton() {
+        return registerButton;
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginScreen().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            LoginScreen loginScreen = new LoginScreen();
+            new LoginController(loginScreen); // Crear el controlador
+            loginScreen.setVisible(true);
+        });
     }
 }
+
