@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 public class Eventos {
 
@@ -10,15 +9,15 @@ public class Eventos {
     private Date fechaEvento;
     private String lugar;
     private ArrayList<String> artistas;
-    private Map<Categorias, Double> precioBoletas;
+    private ArrayList<Boletas> boletas;
 
     public Eventos(String nombreEvento, Date fechaEvento, String lugar, ArrayList<String> artistas,
-            Map<Categorias, Double> precioBoletas) {
+    ArrayList<Boletas> boletas) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
         this.lugar = lugar;
         this.artistas = artistas;
-        this.precioBoletas = precioBoletas;
+        this.boletas = boletas;
     }
 
     public String getNombreEvento() {
@@ -36,11 +35,10 @@ public class Eventos {
     public ArrayList<String> getArtistas() {
         return artistas;
     }
-
-    public Map<Categorias, Double> getPrecioBoletas() {
-        return precioBoletas;
+    public ArrayList<Boletas> getBoletas() {
+        return boletas;
     }
-
+    
     public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
@@ -48,5 +46,7 @@ public class Eventos {
     public void setArtistas(ArrayList<String> artistas) {
         this.artistas = artistas;
     }
+
+
 
 }
