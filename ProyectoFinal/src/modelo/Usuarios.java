@@ -1,8 +1,13 @@
-public class Usuarios {
+import java.io.Serializable;
+
+public class Usuarios implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
     private String correo;
     private String contrasena;
+
+    public Usuarios() {}
 
     public Usuarios(String nombre, String correo, String contrasena) {
         this.nombre = nombre;

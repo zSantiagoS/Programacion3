@@ -1,6 +1,9 @@
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Persistencia {
     private static Persistencia instancia;
@@ -16,30 +19,22 @@ public class Persistencia {
         return instancia;
     }
 
-    public List<Usuarios> leerArchivo() {
-        List<Usuarios> listaUsuarios = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("BASE_USUARIOS"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split("<\\*\\*>");
-                if (datos.length == 3) {
-                    Usuarios usuario = new Usuarios(datos[0], datos[1], datos[2]);
-                    listaUsuarios.add(usuario);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    @SuppressWarnings("unchecked")
+    public ArrayList<Usuarios> leerArchivo() {
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("BASE_USUARIOS.xml")))) {
+            listaUsuarios = (ArrayList<Usuarios>) decoder.readObject();
+        } catch (FileNotFoundException e) {
+            System.err.println("El archivo BASE_USUARIOS.xml no existe todavía.");
         }
         return listaUsuarios;
     }
+    
 
-    public void escribirArchivo(ArrayList<Usuarios> listaUsuarios) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("BASE_USUARIOS"))) {
-            for (Usuarios usuario : listaUsuarios) {
-                bw.write(usuario.getNombre() + "<**>" + usuario.getCorreo() + "<**>" + usuario.getContrasena()+ "\n");
-                
-            }
-        } catch (IOException e) {
+    public void escribirArchivo(List<Usuarios> listaUsuarios) {
+        try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("BASE_USUARIOS.xml")))) {
+            encoder.writeObject(listaUsuarios);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
