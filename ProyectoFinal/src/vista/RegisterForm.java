@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RegisterForm extends JFrame {
     private JTextField nameField;
@@ -16,19 +17,16 @@ public class RegisterForm extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Crear los componentes
         nameField = new JTextField(20);
         emailField = new JTextField(20);
         passwordField = new JPasswordField(20);
         registerButton = new JButton("Registrar");
 
-        // Estilo del botón
         registerButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
         registerButton.setBackground(new Color(33, 150, 243));
         registerButton.setForeground(Color.WHITE);
         registerButton.setFocusPainted(false);
 
-        // Crear un panel para los campos de texto
         JPanel fieldsPanel = new JPanel(new GridBagLayout());
         fieldsPanel.setBackground(new Color(240, 240, 240));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -56,22 +54,18 @@ public class RegisterForm extends JFrame {
         gbc.gridx = 1;
         fieldsPanel.add(passwordField, gbc);
 
-        // Crear un panel para el botón
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(240, 240, 240));
         buttonPanel.add(registerButton);
 
-        // Crear el panel principal y agregar los sub-paneles
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         mainPanel.setBackground(new Color(240, 240, 240));
         mainPanel.add(fieldsPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Agregar el panel principal al frame
         add(mainPanel);
 
-        // Configurar el botón de registro
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,17 +73,11 @@ public class RegisterForm extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                /// Crear un nuevo usuario
                 Usuarios nuevoUsuario = new Usuarios(name, email, password);
                 loginController.addUsuario(nuevoUsuario);
 
-                // Mostrar mensaje de éxito
-                JOptionPane.showMessageDialog(null, "Registro exitoso para " + name);
-
-                // Opcional: cerrar la ventana de registro
                 dispose();
             }
         });
     }
-
 }

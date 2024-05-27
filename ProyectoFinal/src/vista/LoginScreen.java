@@ -72,13 +72,5 @@ public class LoginScreen extends JFrame {
     public JButton getRegisterButton() {
         return registerButton;
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LoginScreen loginScreen = new LoginScreen();
-            new LoginController(loginScreen); // Crear el controlador
-            loginScreen.setVisible(true);
-        });
-    }
 }
 

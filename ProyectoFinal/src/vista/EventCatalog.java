@@ -73,12 +73,4 @@ public class EventCatalog extends JFrame {
         ticketCounter.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new EventCatalog().setVisible(true);
-            }
-        });
-    }
 }
