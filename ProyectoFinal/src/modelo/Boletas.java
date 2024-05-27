@@ -1,44 +1,56 @@
 
-
 public class Boletas {
     private Categorias categoria;
+    private int cantidad;
     private double precio;
-    private int disponibilidad;
 
     // Constructor
-    public Boletas(Categorias categoria, double precio, int disponibilidad) {
+    public Boletas(Categorias categoria, int cantidad, double precio) {
         this.categoria = categoria;
+        this.cantidad = cantidad;
         this.precio = precio;
-        this.disponibilidad = disponibilidad;
     }
+
+
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
+    }
+
+
+    public double getPrecio() {
+        return precio;
+    }
+
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
 
     // Getters
     public Categorias getCategoria() {
         return categoria;
     }
 
-    public double getPrecio() {
-        return precio;
+
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public int getDisponibilidad() {
-        return disponibilidad;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-
-    public void setDisponibilidad(int disponibilidad) {
-        this.disponibilidad = disponibilidad;
+    // Método para verificar la cantidad de boletas
+    public boolean haycantidad() {
+        return cantidad > 0;
     }
 
-    // Método para verificar la disponibilidad de boletas
-    public boolean hayDisponibilidad() {
-        return disponibilidad > 0;
-    }
-
-    // Método para actualizar la disponibilidad después de una compra
-    public void reducirDisponibilidad(int cantidad) {
-        if (cantidad <= disponibilidad) {
-            disponibilidad -= cantidad;
+    // Método para actualizar la cantidad después de una compra
+    public void reducircantidad(int cantidad) {
+        if (cantidad <= cantidad) {
+            cantidad -= cantidad;
         }
     }
+
 }
