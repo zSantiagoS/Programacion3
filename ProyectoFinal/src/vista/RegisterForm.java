@@ -9,10 +9,6 @@ public class RegisterForm extends JFrame {
     private JButton registerButton;
     private LoginController loginController;
 
-    public RegisterForm() {
-        super();
-    }
-
     public RegisterForm(LoginController loginController) {
         this.loginController = loginController;
         setTitle("Registro de Usuario");
@@ -96,12 +92,4 @@ public class RegisterForm extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new RegisterForm().setVisible(true);
-            }
-        });
-    }
 }

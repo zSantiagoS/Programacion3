@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -9,6 +11,7 @@ public class LoginController {
     private List<Usuarios> listaUsuarios;
 
     public LoginController(LoginScreen loginScreen) {
+        listaUsuarios = new ArrayList<>();
         this.loginScreen = loginScreen;
 
         // Asociar los botones a los métodos del controlador usando clases internas
@@ -28,29 +31,32 @@ public class LoginController {
         });
     }
 
-    @SuppressWarnings("unlikely-arg-type")
-    private void handleLogin() {
-        String email = loginScreen.getEmailField().getText();
-        char[] password = loginScreen.getPasswordField().getPassword();
-        
-        if (loginScreen.getEmailField().getText().equals("") || loginScreen.getPasswordField().getPassword().equals("")) {
-            loginScreen.getEmailField().setText("");
-            loginScreen.getPasswordField().setText("");
-            JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos");
-        }
+    public void handleLogin() {
+    String email = loginScreen.getEmailField().getText();
+    char[] password = loginScreen.getPasswordField().getPassword();
 
-        for (Usuarios usuario : listaUsuarios) {
-            if (usuario.getCorreo().equals(email) && usuario.getContrasena().equals(password)) {
-                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                return;
-            }
-        }
-
-        JOptionPane.showMessageDialog(null, "Correo o contraseña incorrectos");
-    
+    // Verificar si los campos están vacíos
+    if (email.isEmpty() || password.length == 0) {
+        JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos");
+        loginScreen.getEmailField().setText("");
+        loginScreen.getPasswordField().setText("");
+        return; // Terminar la ejecución del método si los campos están vacíos
     }
 
-    private void handleRegister() {
+    // Buscar en la lista de usuarios
+    for (Usuarios usuario : listaUsuarios) {
+        if (usuario.getCorreo().equals(email) && Arrays.equals(usuario.getContrasena().toCharArray(), password)) {
+            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+            return; // Terminar la ejecución del método si el login es exitoso
+        }
+    }
+
+    // Si no se encontró el usuario, mostrar mensaje de error
+    JOptionPane.showMessageDialog(null, "Correo o contraseña incorrectos");
+}
+
+
+    public void handleRegister() {
         // Abrir el formulario de registro
         RegisterForm registerForm = new RegisterForm(this);
         registerForm.setVisible(true);
