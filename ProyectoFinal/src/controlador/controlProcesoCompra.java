@@ -13,6 +13,7 @@ public class controlProcesoCompra {
     private procesoCompra compraProceso;
     private Persistencia p;
     private Semaphore semaphoreEventos;
+    private EventCatalog eventCatalog;
 
     public controlProcesoCompra(Eventos evento, Semaphore semaphoreEventos) {
         this.evento = evento;
