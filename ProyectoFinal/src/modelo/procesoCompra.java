@@ -79,6 +79,10 @@ public class procesoCompra {
         return usuario;
     }
 
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
 
 
     
