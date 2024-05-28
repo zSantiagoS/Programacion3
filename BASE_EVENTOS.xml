@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.1" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Eventos">
+    <void property="artistas">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <string>anuel</string>
+      </void>
+      <void method="add">
+       <string>carol</string>
+      </void>
+     </object>
+    </void>
+    <void property="fechaEvento">
+     <string>30-05-2024</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

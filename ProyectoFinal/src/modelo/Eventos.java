@@ -1,17 +1,28 @@
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Eventos {
+public class Eventos implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String nombreEvento;
-    private Date fechaEvento;
+    private String fechaEvento;
     private Locaciones lugar;
     private ArrayList<String> artistas;
     private ArrayList<Boletas> boletas;
 
-    public Eventos(String nombreEvento, Date fechaEvento, Locaciones lugar, ArrayList<String> artistas,
+
+    public Eventos() {
+    }
+    
+    public Eventos(String nombreEvento, String fechaEvento, ArrayList<String> artistas) {
+        this.nombreEvento = nombreEvento;
+        this.fechaEvento = fechaEvento;
+        this.artistas = artistas;
+    }
+
+    public Eventos(String nombreEvento, String fechaEvento, Locaciones lugar, ArrayList<String> artistas,
     ArrayList<Boletas> boletas) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
@@ -24,7 +35,7 @@ public class Eventos {
         return nombreEvento;
     }
 
-    public Date getFechaEvento() {
+    public String getFechaEvento() {
         return fechaEvento;
     }
 
@@ -39,14 +50,12 @@ public class Eventos {
         return boletas;
     }
     
-    public void setFechaEvento(Date fechaEvento) {
+    public void setFechaEvento(String fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
     public void setArtistas(ArrayList<String> artistas) {
         this.artistas = artistas;
     }
-
-
 
 }

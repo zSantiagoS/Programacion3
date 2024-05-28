@@ -2,15 +2,12 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Persistencia {
     private static Persistencia instancia;
 
-    private Persistencia() {
-
-    }
+    private Persistencia() {}
 
     public static Persistencia getInstance() {
         if (instancia == null) {
@@ -37,63 +34,71 @@ public class Persistencia {
             e.printStackTrace();
         }
     }
-    
-    public void escribirArchivoEventos(List<Object> listaObjetos) {
+
+   
+    @SuppressWarnings("unchecked")
+    public ArrayList<Eventos> leerArchivoEventos() {
+        ArrayList<Eventos> listaEventos = new ArrayList<>();
+        File eventosFile = new File("BASE_EVENTOS.xml");
+        
+        if (eventosFile.exists() && eventosFile.isFile()) {
+            try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(eventosFile)))) {
+                listaEventos = (ArrayList<Eventos>) decoder.readObject();
+            } catch (FileNotFoundException e) {
+                System.err.println("El archivo BASE_EVENTOS.xml no existe todavía.");
+            } catch (Exception e) {
+                System.err.println("Error al leer el archivo BASE_EVENTOS.xml: " + e.getMessage());
+            }
+        } else {
+            System.err.println("El archivo BASE_EVENTOS.xml está vacío o no existe.");
+        }
+        
+        return listaEventos;
+    }
+
+    public void escribirArchivoEventos(List<Eventos> listaEventos) {
         try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("BASE_EVENTOS.xml")))) {
-            encoder.writeObject(listaObjetos);
+            encoder.writeObject(listaEventos);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    // Guadar transaccion
-    public void guadarTransaccion(double pagoTotal, Usuarios usuario, Eventos evento, Categorias categoria,
-            String metodoPago, int cantidadBoletas) {
-
+    public void guadarTransaccion(double pagoTotal, Usuarios usuario, Eventos evento, String metodoPago, int cantidadBoletas) {
         try {
-
-            // Verifica si el directorio existe, si no, lo crea
             File directorio = new File("./Transacciones");
             if (!directorio.exists()) {
                 directorio.mkdir();
             }
 
-            // Crear archivo en el directorio Transacciones
             File archivo = new File(directorio, "transaccion.txt");
 
-
-            //Se habre el archivo en modo append para ir agregando datos 
             FileWriter escritor = new FileWriter(archivo, true);
             BufferedWriter bufferEscritor = new BufferedWriter(escritor);
 
-            Date fechaActual = new Date();
+            java.util.Date fechaActual = new java.util.Date();
 
-            //Detalles de la transaccion 
             bufferEscritor.write("Detalles de la transacción:");
             bufferEscritor.newLine();
-            bufferEscritor.write("Fecha: " + usuario.getNombre());
+            bufferEscritor.write("Fecha: " + fechaActual.toString());
             bufferEscritor.newLine();
-            bufferEscritor.write("Nombre del usuario: " + fechaActual.toString());
+            bufferEscritor.write("Nombre del usuario: " + usuario.getNombre());
             bufferEscritor.newLine();
             bufferEscritor.write("Evento: " + evento.getNombreEvento());
             bufferEscritor.newLine();
             bufferEscritor.write("Cantidad de boletas: " + cantidadBoletas);
             bufferEscritor.newLine();
-            bufferEscritor.write("Categoría: " + categoria);
-            bufferEscritor.newLine();
             bufferEscritor.write("Método de pago: " + metodoPago);
             bufferEscritor.newLine();
             bufferEscritor.write("Precio total: " + pagoTotal);
+            bufferEscritor.newLine();
 
             bufferEscritor.close();
             escritor.close();
 
             System.out.println("Transacción guardada en el archivo 'transaccion.txt'.");
-
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }

@@ -123,6 +123,8 @@ public class LoginController {
         }
     }
 
+    
+
     public boolean usuarioExiste(String correo) {
         for (Usuarios usuario : listaUsuarios) {
             if (usuario.getCorreo().equals(correo)) {

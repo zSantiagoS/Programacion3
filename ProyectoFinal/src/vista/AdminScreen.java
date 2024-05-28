@@ -3,12 +3,19 @@ import java.awt.*;
 
 public class AdminScreen extends JFrame {
 
+    private RegistroEventoController registroEventoController;
+
     public AdminScreen() {
+        
         setTitle("Panel de Administración");
         setSize(450, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // Crear un nuevo RegisterEventView para el controlador de eventos
+        RegisterEventView registerEventView = new RegisterEventView(registroEventoController);
+        registroEventoController = new RegistroEventoController(registerEventView);
+        
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -60,8 +67,9 @@ public class AdminScreen extends JFrame {
     }
 
     private void showRegisterEventScreen() {
-        RegisterEventView registerEventView = new RegisterEventView();
+        RegisterEventView registerEventView = new RegisterEventView(registroEventoController);
         registerEventView.setVisible(true);
+
     }
 
     private void showOpenTaquillaScreen() {
@@ -73,5 +81,12 @@ public class AdminScreen extends JFrame {
         CloseTaquillaView closeTaquillaView = new CloseTaquillaView();
         closeTaquillaView.setVisible(true);
     }
-}
 
+    public static void main(String[] args) {
+        // Crear la pantalla de administración y mostrarla
+        SwingUtilities.invokeLater(() -> {
+            AdminScreen adminScreen = new AdminScreen();
+            adminScreen.setVisible(true);
+        });
+    }
+}

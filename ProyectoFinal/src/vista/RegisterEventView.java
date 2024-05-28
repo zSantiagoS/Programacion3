@@ -1,20 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RegisterEventView extends JFrame {
 
+    private RegistroEventoController registroEventoController;
     private JTextField eventField;
     private JTextField dateField;
-    private JComboBox<String> categoryComboBox;
+    private JTextField categoryField;
+    private JButton addCategoryButton;
+    private DefaultListModel<String> categoryListModel;
+    private JList<String> categoryList;
     private JButton registerButton;
-    private JButton datePickerButton;
 
-    public RegisterEventView() {
+    public RegisterEventView(RegistroEventoController registroEventoController) {
+        this.registroEventoController = registroEventoController;
         setTitle("Registrar Evento");
-        setSize(400, 300); // Aumenté la altura para acomodar más componentes
+        setSize(400, 500); // Aumenté la altura para acomodar más componentes
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -50,7 +56,7 @@ public class RegisterEventView extends JFrame {
         gbc.gridx = 1;
         panel.add(dateField, gbc);
 
-        datePickerButton = new JButton("Seleccionar Fecha");
+        JButton datePickerButton = new JButton("Seleccionar Fecha");
         datePickerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 dateField.setText(new SimpleDatePicker(RegisterEventView.this).setPickedDate());
@@ -64,21 +70,64 @@ public class RegisterEventView extends JFrame {
         gbc.gridy = 3;
         panel.add(categoryLabel, gbc);
 
-        String[] categories = {"Categoria 1", "Categoria 2", "Categoria 3"}; // Ejemplo de opciones para el ComboBox
-        categoryComboBox = new JComboBox<>(categories);
+        categoryField = new JTextField(15);
         gbc.gridx = 1;
-        panel.add(categoryComboBox, gbc);
+        panel.add(categoryField, gbc);
+
+        addCategoryButton = new JButton("Agregar Categoría");
+        addCategoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String category = categoryField.getText().trim();
+                if (!category.isEmpty() && !categoryListModel.contains(category)) {
+                    categoryListModel.addElement(category);
+                    categoryField.setText("");
+                }
+            }
+        });
+        gbc.gridx = 2;
+        panel.add(addCategoryButton, gbc);
+
+        categoryListModel = new DefaultListModel<>();
+        categoryList = new JList<>(categoryListModel);
+        categoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weighty = 1.0;
+        JScrollPane scrollPane = new JScrollPane(categoryList);
+        panel.add(scrollPane, gbc);
 
         registerButton = new JButton("Registrar");
         registerButton.setBackground(new Color(33, 150, 243));
         registerButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(registerButton, gbc);
 
         add(panel);
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = eventField.getText();
+                String fecha = dateField.getText();
+                ArrayList<String> listaArtistas = new ArrayList<>();
+
+                for (int i = 0; i < categoryList.getModel().getSize(); i++) {
+                    listaArtistas.add(categoryList.getModel().getElementAt(i));
+                }
+
+                Eventos evento= new Eventos(nombre, fecha, listaArtistas);
+                registroEventoController.addEvento(evento);
+
+                dispose();
+            }
+        });
+
     }
 
     public JTextField getEventField() {
@@ -89,15 +138,28 @@ public class RegisterEventView extends JFrame {
         return dateField;
     }
 
-    public JComboBox<String> getCategoryComboBox() {
-        return categoryComboBox;
+    public JTextField getCategoryField() {
+        return categoryField;
+    }
+
+    public DefaultListModel<String> getCategoryListModel() {
+        return categoryListModel;
+    }
+
+    public JList<String> getCategoryList() {
+        return categoryList;
     }
 
     public JButton getRegisterButton() {
         return registerButton;
     }
 
-    
+    public void clearFields() {
+        eventField.setText("");
+        dateField.setText("");
+        categoryListModel.removeAllElements(); // Limpiar la lista de categorías
+    }
+
     class SimpleDatePicker extends JPanel {
         int month = Calendar.getInstance().get(Calendar.MONTH);
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -109,7 +171,7 @@ public class RegisterEventView extends JFrame {
         public SimpleDatePicker(JFrame parent) {
             d = new JDialog();
             d.setModal(true);
-            String[] header = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+            String[] header = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
             JPanel p1 = new JPanel(new GridLayout(7, 7));
             p1.setPreferredSize(new Dimension(700, 200));
 
@@ -180,3 +242,4 @@ public class RegisterEventView extends JFrame {
         }
     }
 }
+
