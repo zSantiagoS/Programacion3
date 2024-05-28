@@ -7,6 +7,7 @@ public class procesoCompra {
     private String metodoPago;
     private Categorias categoria;
     private Usuarios usuario;
+    
 
     //Constructor 
     public procesoCompra(Eventos eventos, int cantidadBoletas, String metodoPago, Categorias categoria, Usuarios usuario) {
@@ -23,7 +24,7 @@ public class procesoCompra {
         double pagoTotalCategoria = 0;
         //Recorrer cada boleta y generar el costo 
         for (Boletas boleta : boletas) {
-            if (boleta.getCategoria().equals(categoria)) {
+            if (boleta.getCategoria().equals(this.categoria)) {
                 int cantidadDisponible = boleta.getCantidad();
                 if (cantidadBoletas <= cantidadDisponible) {
                     double precio_unitario = boleta.getPrecio();
