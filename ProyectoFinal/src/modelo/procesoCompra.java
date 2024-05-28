@@ -1,8 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 public class procesoCompra {
@@ -60,45 +55,6 @@ public class procesoCompra {
 
     }
 
-    //Guadar transaccion 
-    public void guadarTransaccion(double pagoTotal){
-        
-        try {
-
-            File archivo = new File("./Transacciones"+"transaccion_" + getUsuario().getNombre() + ".txt");
-
-            FileWriter escritor = new FileWriter(archivo);
-            BufferedWriter bufferEscritor = new BufferedWriter(escritor);
-
-            Date fechaActual = new Date();
-
-            bufferEscritor.write("Detalles de la transacción:");
-            bufferEscritor.newLine();
-            bufferEscritor.write("Fecha: " + fechaActual.toString());
-            bufferEscritor.newLine();
-            bufferEscritor.write("Evento: " + eventos.getNombreEvento());
-            bufferEscritor.newLine();
-            bufferEscritor.write("Cantidad de boletas: " + cantidadBoletas);
-            bufferEscritor.newLine();
-            bufferEscritor.write("Categoría: " + categoria);
-            bufferEscritor.newLine();
-            bufferEscritor.write("Método de pago: " + metodoPago);
-            bufferEscritor.newLine();
-            bufferEscritor.write("Precio total: " + pagoTotal);
-
-            bufferEscritor.close();
-            escritor.close();
-
-            System.out.println("Transacción guardada en el archivo 'transaccion.txt'.");
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-
-
-    }
 
     public Eventos getEventos() {
         return eventos;
