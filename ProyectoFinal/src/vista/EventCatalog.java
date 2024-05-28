@@ -10,15 +10,17 @@ public class EventCatalog extends JFrame {
     private DefaultTableModel tableModel;
     private Persistencia p;
     private static EventCatalog instancia;
+    private EventClient client;
+    private Usuarios usuario;
 
-    public static EventCatalog getInstance() {
+    public static EventCatalog getInstance(EventClient client, Usuarios usuario) {
         if (instancia == null) {
-            instancia = new EventCatalog();
+            instancia = new EventCatalog(client, usuario);
         }
         return instancia;
     }
 
-    public EventCatalog() {
+    public EventCatalog(EventClient client, Usuarios usuario) {
         p = Persistencia.getInstance();
         setTitle("Catálogo de Eventos");
         setSize(800, 500);
@@ -101,10 +103,6 @@ public class EventCatalog extends JFrame {
         return eventTable;
     }
 
-    public static void main(String[] args) {
-        EventCatalog catalog = new EventCatalog();
-        catalog.setVisible(true);
-    }
 }
 
 
