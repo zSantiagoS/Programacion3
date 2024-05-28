@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CloseTaquillaView extends JFrame {
 
@@ -22,15 +23,34 @@ public class CloseTaquillaView extends JFrame {
         gbc.gridwidth = 2;
         panel.add(titleLabel, gbc);
 
+        // Simulación de lista de eventos disponibles
+        ArrayList<String> eventos = new ArrayList<>();
+        eventos.add("Evento 1");
+        eventos.add("Evento 2");
+        eventos.add("Evento 3");
+
+        JComboBox<String> eventosComboBox = new JComboBox<>(eventos.toArray(new String[0]));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        panel.add(eventosComboBox, gbc);
+
         JButton closeButton = new JButton("Cerrar Taquilla");
         closeButton.setBackground(new Color(33, 150, 243));
         closeButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
         panel.add(closeButton, gbc);
 
         add(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            CloseTaquillaView frame = new CloseTaquillaView();
+            frame.setVisible(true);
+        });
     }
 }
