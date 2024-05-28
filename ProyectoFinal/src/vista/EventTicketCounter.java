@@ -15,6 +15,14 @@ public class EventTicketCounter extends JFrame {
     private JTextField quantityField;
     private JComboBox<String> seatTypeComboBox;
     private JButton buyButton;
+    private static EventTicketCounter instancia;
+
+    public static EventTicketCounter getInstance(String eventName) {
+        if (instancia == null) {
+            instancia = new EventTicketCounter(eventName);
+        }
+        return instancia;
+    }
 
     public EventTicketCounter(String eventName) {
         this.eventName = eventName;
@@ -173,7 +181,7 @@ public class EventTicketCounter extends JFrame {
             e.printStackTrace();
         }
     }
-
+    
     private void closeTicketCounter() {
         // Obtener la hora actual y la hora del evento (simulada)
         LocalDateTime currentTime = LocalDateTime.now();
