@@ -13,15 +13,14 @@ public class EventTicketCounter extends JFrame {
     private JLabel titleLabel;
     private JLabel availabilityLabel;
     private JTextField quantityField;
-    private JTextField nameField; // Campo para el nombre del comprador
-    private JTextField idField; // Campo para la identificación del comprador
+    private JComboBox<String> seatTypeComboBox;
     private JButton buyButton;
 
     public EventTicketCounter(String eventName) {
         this.eventName = eventName;
 
         setTitle("Taquilla Virtual - " + eventName);
-        setSize(400, 400);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -34,9 +33,10 @@ public class EventTicketCounter extends JFrame {
         availabilityLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
         quantityField = new JTextField(10);
-        nameField = new JTextField(10);
-        idField = new JTextField(10);
         
+        String[] seatTypes = {"Oro", "Plata", "Bronce"};
+        seatTypeComboBox = new JComboBox<>(seatTypes);
+
         buyButton = new JButton("Comprar");
         buyButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
         buyButton.setBackground(new Color(33, 150, 243));
@@ -44,49 +44,47 @@ public class EventTicketCounter extends JFrame {
         buyButton.setFocusPainted(false);
 
         // Configurar el panel principal con GridBagLayout para mejor control de los componentes
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         
-        // Añadir componentes al panel
-        gbc.gridx = 0;
+        // Añadir componentes al panel principal
+        gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        panel.add(titleLabel, gbc);
+        mainPanel.add(titleLabel, gbc);
 
         gbc.gridy++;
-        panel.add(availabilityLabel, gbc);
+        mainPanel.add(availabilityLabel, gbc);
 
         gbc.gridy++;
         gbc.gridwidth = 1;
-        panel.add(new JLabel("Cantidad de Boletas:"), gbc);
+        mainPanel.add(new JLabel("Cantidad de Boletas:"), gbc);
+
+        gbc.gridx = 2;
+        mainPanel.add(quantityField, gbc);
 
         gbc.gridx = 1;
-        panel.add(quantityField, gbc);
-
-        gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Nombre:"), gbc);
+        mainPanel.add(new JLabel("Tipo de Asiento:"), gbc);
+
+        gbc.gridx = 2;
+        mainPanel.add(seatTypeComboBox, gbc);
 
         gbc.gridx = 1;
-        panel.add(nameField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy++;
-        panel.add(new JLabel("Identificación:"), gbc);
-
-        gbc.gridx = 1;
-        panel.add(idField, gbc);
-
-        gbc.gridx = 0;
         gbc.gridy++;
         gbc.gridwidth = 2;
-        panel.add(buyButton, gbc);
+        mainPanel.add(buyButton, gbc);
 
-        // Agregar el panel al frame
-        add(panel);
+        // Crear el panel del teatro con la representación visual de los asientos
+        JPanel theaterPanel = createTheaterPanel();
+        
+        // Añadir los paneles al frame
+        getContentPane().setLayout(new GridLayout(1, 2));
+        add(theaterPanel);
+        add(mainPanel);
 
         // Actualizar la disponibilidad de boletas al abrir la ventana
         updateAvailability();
@@ -101,10 +99,9 @@ public class EventTicketCounter extends JFrame {
                 // Verificar si hay espacio en la cola para el cliente actual
                 if (checkQueueCapacity()) {
                     int quantity = Integer.parseInt(quantityField.getText());
-                    String name = nameField.getText(); // Obtener el nombre del comprador
-                    String id = idField.getText(); // Obtener la identificación del comprador
+                    String seatType = (String) seatTypeComboBox.getSelectedItem();
                     // Simular una compra exitosa
-                    if (purchaseTickets(quantity, name, id)) {
+                    if (purchaseTickets(quantity, seatType)) {
                         JOptionPane.showMessageDialog(null, "Compra exitosa. Se han generado los boletos electrónicos.");
                         dispose(); // Cerrar la ventana después de la compra
                     } else {
@@ -115,6 +112,55 @@ public class EventTicketCounter extends JFrame {
                 }
             }
         });
+    }
+
+    private JPanel createTheaterPanel() {
+        JPanel theaterPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                int totalSeats = 100;
+                int goldSeats = (int) (totalSeats * 0.10);
+                int silverSeats = (int) (totalSeats * 0.30);
+                int bronzeSeats = totalSeats - goldSeats - silverSeats;
+
+                int seatWidth = 20;
+                int seatHeight = 20;
+                int startX = 50;
+                int startY = 50;
+                int gap = 5;
+
+                int row = 0, col = 0;
+
+                for (int i = 0; i < totalSeats; i++) {
+                    if (i < goldSeats) {
+                        g.setColor(Color.YELLOW);
+                    } else if (i < goldSeats + silverSeats) {
+                        g.setColor(Color.LIGHT_GRAY);
+                    } else {
+                        g.setColor(Color.ORANGE);
+                    }
+
+                    g.fillRect(startX + col * (seatWidth + gap), startY + row * (seatHeight + gap), seatWidth, seatHeight);
+
+                    col++;
+                    if (col >= 10) {
+                        col = 0;
+                        row++;
+                    }
+                }
+
+                // Dibujar la tarima
+                g.setColor(Color.DARK_GRAY);
+                g.fillRect(startX, startY - 30, 10 * (seatWidth + gap) - gap, 20);
+                g.setColor(Color.WHITE);
+                g.drawString("Tarima", startX + (10 * (seatWidth + gap) - gap) / 2 - 20, startY - 15);
+            }
+        };
+
+        theaterPanel.setPreferredSize(new Dimension(300, 300));
+        theaterPanel.setBorder(BorderFactory.createTitledBorder("Teatro"));
+        return theaterPanel;
     }
 
     private void updateAvailability() {
@@ -140,8 +186,7 @@ public class EventTicketCounter extends JFrame {
         if (hoursUntilEvent < 1) {
             buyButton.setEnabled(false);
             quantityField.setEnabled(false);
-            nameField.setEnabled(false); // Deshabilitar el campo de nombre
-            idField.setEnabled(false); // Deshabilitar el campo de identificación
+            seatTypeComboBox.setEnabled(false); // Deshabilitar la selección de tipo de asiento
             JOptionPane.showMessageDialog(null, "La taquilla se ha cerrado. Ya no se pueden realizar compras.");
         }
     }
@@ -161,13 +206,13 @@ public class EventTicketCounter extends JFrame {
         }
     }
 
-    private boolean purchaseTickets(int quantity, String name, String id) {
-        // Simular la generación de boletos electrónicos con nombre e identificación del comprador
+    private boolean purchaseTickets(int quantity, String seatType) {
+        // Simular la generación de boletos electrónicos con el tipo de asiento
         try {
-            // Crear un archivo PDF para cada boleto con el nombre e identificación del comprador
+            // Crear un archivo PDF para cada boleto con el tipo de asiento
             for (int i = 0; i < quantity; i++) {
-                String fileName = "ticket_" + i + "_" + name + "_" + id + ".pdf";
-                // Aquí puedes agregar la lógica para generar el boleto en PDF con el nombre e identificación del comprador
+                String fileName = "ticket_" + i + "_" + seatType + ".pdf";
+                // Aquí puedes agregar la lógica para generar el boleto en PDF con el tipo de asiento
                 System.out.println("Boleto electrónico generado: " + fileName);
             }
             return true;
