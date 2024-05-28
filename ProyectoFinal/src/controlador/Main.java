@@ -42,7 +42,6 @@ public class Main {
             userButton.setForeground(Color.WHITE);
             userButton.setFocusPainted(false);
             userButton.addActionListener(e -> {
-                frame.dispose(); // Cerrar el menú inicial
                 openLoginRegister();
             });
             gbc.gridx = 1;
