@@ -55,8 +55,10 @@ public class controlProcesoCompra {
 
         Double costoTotal =  procesoCompra.pagarTotal();
 
+        String stringCostoTotal = String.valueOf(costoTotal);
+
         //Abrir la ventana de pago
-        paymentInterface = new PaymentInterface(costoTotal);
+        paymentInterface = new PaymentInterface(stringCostoTotal);
         paymentInterface.setVisible(true);
 
 
