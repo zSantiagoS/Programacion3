@@ -92,7 +92,7 @@ public class LoginController {
                         if (response.isLoginExitoso()) {
                             SwingUtilities.invokeLater(() -> {
                                 JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                                EventCatalog eventCatalog = new EventCatalog(client, usuario);
+                                EventCatalog eventCatalog = new EventCatalog(usuario);
                                 System.out.println(eventCatalog);
                                 eventCatalog.addWindowListener(new java.awt.event.WindowAdapter() {
                                     @Override
@@ -106,7 +106,6 @@ public class LoginController {
                                         }
                                     }
                                 });
-                                eventCatalog.setVisible(true);
                             });
                         } else {
                             SwingUtilities.invokeLater(() -> {
