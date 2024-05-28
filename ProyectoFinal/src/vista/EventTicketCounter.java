@@ -86,11 +86,7 @@ public class EventTicketCounter extends JFrame {
         add(theaterPanel);
         add(mainPanel);
 
-        // Actualizar la disponibilidad de boletas al abrir la ventana
-        updateAvailability();
 
-        // Verificar y cerrar la taquilla automáticamente una hora antes del evento
-        closeTicketCounter();
 
         // Configurar el botón de compra
         buyButton.addActionListener(new ActionListener() {
@@ -166,34 +162,7 @@ public class EventTicketCounter extends JFrame {
         theaterPanel.setBorder(BorderFactory.createTitledBorder("Teatro"));
         return theaterPanel;
     }
-
-    private void updateAvailability() {
-        try (Socket socket = new Socket("localhost", 9091)) {
-            // Leer la disponibilidad de boletas del servidor
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            int availability = Integer.parseInt(in.readLine());
-            availabilityLabel.setText("Boletas disponibles: " + availability);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void closeTicketCounter() {
-        // Obtener la hora actual y la hora del evento (simulada)
-        LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime eventTime = LocalDateTime.of(2024, Month.MAY, 20, 19, 0); // Ejemplo: Evento a las 19:00 el 20 de mayo de 2024
-
-        // Calcular la diferencia de tiempo en horas entre la hora actual y la hora del evento
-        long hoursUntilEvent = Duration.between(currentTime, eventTime).toHours();
-
-        // Si queda menos de una hora para el evento, cerrar la taquilla
-        if (hoursUntilEvent < 1) {
-            buyButton.setEnabled(false);
-            quantityField.setEnabled(false);
-            seatTypeComboBox.setEnabled(false); // Deshabilitar la selección de tipo de asiento
-            JOptionPane.showMessageDialog(null, "La taquilla se ha cerrado. Ya no se pueden realizar compras.");
-        }
-    }
+    
 
     private boolean checkQueueCapacity() {
         // Utilizar un semáforo para controlar el acceso a la cola de ingreso
@@ -213,10 +182,8 @@ public class EventTicketCounter extends JFrame {
     private boolean purchaseTickets(int quantity, String seatType) {
         // Simular la generación de boletos electrónicos con el tipo de asiento
         try {
-            // Crear un archivo PDF para cada boleto con el tipo de asiento
             for (int i = 0; i < quantity; i++) {
                 String fileName = "ticket_" + i + "_" + seatType + ".pdf";
-                // Aquí puedes agregar la lógica para generar el boleto en PDF con el tipo de asiento
                 System.out.println("Boleto electrónico generado: " + fileName);
             }
             return true;
