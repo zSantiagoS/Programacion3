@@ -76,6 +76,13 @@
     </void>
     <void property="nombre">
      <string>prueba3</string>
+     <string>hola</string>
+    </void>
+    <void property="correo">
+     <string>hola</string>
+    </void>
+    <void property="nombre">
+     <string>hola</string>
     </void>
    </object>
   </void>

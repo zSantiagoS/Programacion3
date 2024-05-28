@@ -30,9 +30,17 @@ public class Persistencia {
         return listaUsuarios;
     }
 
-    public void escribirArchivo(List<Usuarios> listaUsuarios) {
+    public void escribirArchivo(List<Usuarios> listaObjetos) {
         try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("BASE_USUARIOS.xml")))) {
-            encoder.writeObject(listaUsuarios);
+            encoder.writeObject(listaObjetos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void escribirArchivoEventos(List<Object> listaObjetos) {
+        try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("BASE_EVENTOS.xml")))) {
+            encoder.writeObject(listaObjetos);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
