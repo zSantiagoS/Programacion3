@@ -35,6 +35,7 @@ public class OpenTaquillaView extends JFrame {
         gbc.gridwidth = 2;
         panel.add(eventosComboBox, gbc);
 
+        
         JLabel bronzeLabel = new JLabel("Bronce:");
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -82,6 +83,7 @@ public class OpenTaquillaView extends JFrame {
         gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
+        panel.add(openButton, gbc);
         panel.add(openButton, gbc);
 
         add(panel);
