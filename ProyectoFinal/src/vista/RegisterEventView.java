@@ -65,7 +65,7 @@ public class RegisterEventView extends JFrame {
         gbc.gridx = 2;
         panel.add(datePickerButton, gbc);
 
-        JLabel categoryLabel = new JLabel("Categoría:");
+        JLabel categoryLabel = new JLabel("Artistas:");
         gbc.gridx = 0;
         gbc.gridy = 3;
         panel.add(categoryLabel, gbc);
@@ -74,7 +74,7 @@ public class RegisterEventView extends JFrame {
         gbc.gridx = 1;
         panel.add(categoryField, gbc);
 
-        addCategoryButton = new JButton("Agregar Categoría");
+        addCategoryButton = new JButton("Agregar Artista");
         addCategoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String category = categoryField.getText().trim();

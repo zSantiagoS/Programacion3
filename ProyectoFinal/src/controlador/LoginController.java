@@ -94,6 +94,7 @@ public class LoginController {
                                 JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
                                 EventCatalog eventCatalog = new EventCatalog(usuario);
                                 System.out.println(eventCatalog);
+                                
                                 eventCatalog.addWindowListener(new java.awt.event.WindowAdapter() {
                                     @Override
                                     public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -105,7 +106,9 @@ public class LoginController {
                                             ex.printStackTrace();
                                         }
                                     }
+                                    
                                 });
+                                loginScreen.dispose();
                             });
                         } else {
                             SwingUtilities.invokeLater(() -> {
