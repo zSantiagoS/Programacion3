@@ -125,6 +125,10 @@ public class LoginController {
         }
     }
 
+    
+
+    
+
     //Verificar si existe el usuario
     public boolean usuarioExiste(String correo) {
         for (Usuarios usuario : listaUsuarios) {

@@ -1,11 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.net.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.concurrent.*;
 
 public class EventTicketCounter extends JFrame {
