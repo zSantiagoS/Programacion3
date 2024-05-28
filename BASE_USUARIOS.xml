@@ -14,5 +14,18 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="Usuarios">
+    <void property="contrasena">
+     <string>hola</string>
+    </void>
+    <void property="correo">
+     <string>hola</string>
+    </void>
+    <void property="nombre">
+     <string>hola</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

@@ -7,11 +7,11 @@ public class Eventos {
 
     private String nombreEvento;
     private Date fechaEvento;
-    private String lugar;
+    private Locaciones lugar;
     private ArrayList<String> artistas;
     private ArrayList<Boletas> boletas;
 
-    public Eventos(String nombreEvento, Date fechaEvento, String lugar, ArrayList<String> artistas,
+    public Eventos(String nombreEvento, Date fechaEvento, Locaciones lugar, ArrayList<String> artistas,
     ArrayList<Boletas> boletas) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
@@ -28,7 +28,7 @@ public class Eventos {
         return fechaEvento;
     }
 
-    public String getLugar() {
+    public Locaciones getLugar() {
         return lugar;
     }
 

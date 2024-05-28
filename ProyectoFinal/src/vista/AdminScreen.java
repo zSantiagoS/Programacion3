@@ -73,9 +73,5 @@ public class AdminScreen extends JFrame {
         CloseTaquillaView closeTaquillaView = new CloseTaquillaView();
         closeTaquillaView.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new AdminScreen().setVisible(true));
-    }
 }
 
