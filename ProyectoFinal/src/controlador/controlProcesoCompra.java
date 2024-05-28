@@ -14,13 +14,17 @@ public class controlProcesoCompra {
     private Persistencia p;
     private Semaphore semaphoreEventos;
     private EventCatalog eventCatalog;
+    private Usuarios usuario;
 
-    public controlProcesoCompra(Eventos evento, Semaphore semaphoreEventos) {
+    public controlProcesoCompra(Eventos evento, Semaphore semaphoreEventos, Usuarios usuario) {
         this.evento = evento;
         this.p = Persistencia.getInstance();
         this.eventCounter = EventTicketCounter.getInstance(evento.getNombreEvento());
-        this.paymentInterface = PaymentInterface.getInstance();
         this.semaphoreEventos = semaphoreEventos;
+        this.usuario = usuario;
+
+        //Abrir ventana de seleccion de tiquetes
+        this.eventCounter.setVisible(true);
 
         // Configurar el botón de compra en EventTicketCounter
         this.eventCounter.getBuyButton().addActionListener(new ActionListener() {
@@ -47,7 +51,14 @@ public class controlProcesoCompra {
         int cantidadBoletas = Integer.parseInt(eventCounter.getQuantityField().getText());
         Categorias categoria = (Categorias) eventCounter.getSeatTypeComboBox().getSelectedItem();
         
-        procesoCompra procesoCompra = new procesoCompra(evento, cantidadBoletas, null, categoria, null);
+        procesoCompra procesoCompra = new procesoCompra(evento, cantidadBoletas, null, categoria, usuario);
+
+        Double costoTotal =  procesoCompra.pagarTotal();
+
+        //Abrir la ventana de pago
+        paymentInterface = new PaymentInterface(costoTotal);
+        paymentInterface.setVisible(true);
+
 
 
         
