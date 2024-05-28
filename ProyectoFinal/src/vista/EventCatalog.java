@@ -9,6 +9,14 @@ public class EventCatalog extends JFrame {
     private JTable eventTable;
     private DefaultTableModel tableModel;
     private Persistencia p;
+    private static EventCatalog instancia;
+
+    public static EventCatalog getInstance() {
+        if (instancia == null) {
+            instancia = new EventCatalog();
+        }
+        return instancia;
+    }
 
     public EventCatalog() {
         p = Persistencia.getInstance();
@@ -56,7 +64,12 @@ public class EventCatalog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = eventTable.getSelectedRow();
                 if (selectedRow != -1) {
+
                     String eventName = (String) eventTable.getValueAt(selectedRow, 0);
+                    String fecha = (String) eventTable.getValueAt(selectedRow, 1);
+                    String lugar = "Lugar";
+                    ArrayList<String> artistas = (ArrayList<String>) eventTable.getValueAt(selectedRow, 3);
+                    Eventos evento = new Eventos(eventName, fecha, artistas);
                     openTicketCounter(eventName);
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor selecciona un evento.");
@@ -80,6 +93,12 @@ public class EventCatalog extends JFrame {
         // Abrir la taquilla virtual para el evento seleccionado
         EventTicketCounter ticketCounter = new EventTicketCounter(eventName);
         ticketCounter.setVisible(true);
+    }
+
+    
+
+    public JTable getEventTable() {
+        return eventTable;
     }
 
     public static void main(String[] args) {
