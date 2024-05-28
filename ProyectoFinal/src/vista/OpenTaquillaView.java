@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OpenTaquillaView extends JFrame {
 
@@ -8,7 +9,6 @@ public class OpenTaquillaView extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -23,9 +23,21 @@ public class OpenTaquillaView extends JFrame {
         gbc.gridwidth = 2;
         panel.add(titleLabel, gbc);
 
-        JLabel bronzeLabel = new JLabel("Bronce:");
+        // Simulación de lista de eventos disponibles
+        ArrayList<String> eventos = new ArrayList<>();
+        eventos.add("Evento 1");
+        eventos.add("Evento 2");
+        eventos.add("Evento 3");
+
+        JComboBox<String> eventosComboBox = new JComboBox<>(eventos.toArray(new String[0]));
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        panel.add(eventosComboBox, gbc);
+
+        JLabel bronzeLabel = new JLabel("Bronce:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         panel.add(bronzeLabel, gbc);
 
@@ -35,7 +47,7 @@ public class OpenTaquillaView extends JFrame {
 
         JLabel silverLabel = new JLabel("Plata:");
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         panel.add(silverLabel, gbc);
 
@@ -45,7 +57,7 @@ public class OpenTaquillaView extends JFrame {
 
         JLabel goldLabel = new JLabel("Oro:");
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         panel.add(goldLabel, gbc);
 
@@ -55,7 +67,7 @@ public class OpenTaquillaView extends JFrame {
 
         JLabel timeLabel = new JLabel("Hora de Apertura:");
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 1;
         panel.add(timeLabel, gbc);
 
@@ -67,11 +79,18 @@ public class OpenTaquillaView extends JFrame {
         openButton.setBackground(new Color(33, 150, 243));
         openButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
         panel.add(openButton, gbc);
 
         add(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            OpenTaquillaView frame = new OpenTaquillaView();
+            frame.setVisible(true);
+        });
     }
 }
