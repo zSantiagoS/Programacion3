@@ -20,7 +20,6 @@ public class EventCatalog extends JFrame {
         tableModel.addColumn("Fecha");
         tableModel.addColumn("Lugar");
         tableModel.addColumn("Artistas");
-        tableModel.addColumn("Precio (Cobre, Plata, Oro)");
 
         // Crear la tabla
         eventTable = new JTable(tableModel);
@@ -63,8 +62,8 @@ public class EventCatalog extends JFrame {
         });
 
         // Agregar algunos datos de ejemplo
-        tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ", "$50, $100, $150"});
-        tableModel.addRow(new Object[]{"Festival de Jazz", "2023-09-10", "Auditorio Nacional", "Artista ABC", "$30, $60, $90"});
+        tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ"});
+        tableModel.addRow(new Object[]{"Festival de Jazz", "2023-09-10", "Auditorio Nacional", "Artista ABC"});
     }
 
     private void openTicketCounter(String eventName) {
@@ -73,4 +72,24 @@ public class EventCatalog extends JFrame {
         ticketCounter.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        EventCatalog catalog = new EventCatalog();
+        catalog.setVisible(true);
+    }
 }
+
+class EventTicketCounter extends JFrame {
+    public EventTicketCounter(String eventName) {
+        setTitle("Taquilla - " + eventName);
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JLabel label = new JLabel("Comprar boletas para: " + eventName);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+
+        add(label, BorderLayout.CENTER);
+    }
+}
+
