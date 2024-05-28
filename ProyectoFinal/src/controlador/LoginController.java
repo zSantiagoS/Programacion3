@@ -36,6 +36,7 @@ public class LoginController {
             }
         });
 
+        //Boton de registarar
         this.loginScreen.getRegisterButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,6 +77,7 @@ public class LoginController {
                     usuariosActivos.add(usuario.getCorreo());  // Agregar usuario al conjunto de usuarios activos
                     SwingUtilities.invokeLater(() -> {
                         JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                        //Aca debe que estar el controlador de proceso de compras
                         EventCatalog eventCatalog = new EventCatalog();
                         eventCatalog.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
