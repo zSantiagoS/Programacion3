@@ -94,32 +94,6 @@ public class EventTicketCounter extends JFrame {
         add(theaterPanel);
         add(mainPanel);
 
-
-
-        // Configurar el botón de compra
-        buyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Verificar si hay espacio en la cola para el cliente actual
-                if (checkQueueCapacity()) {
-                    int quantity = Integer.parseInt(quantityField.getText());
-                    String seatType = (String) seatTypeComboBox.getSelectedItem();
-                    // Simular una compra exitosa
-                    if (purchaseTickets(quantity, seatType)) {
-                        // Mostrar la interfaz de pago
-                        PaymentInterface paymentInterface = new PaymentInterface();
-                        paymentInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        paymentInterface.setVisible(true);
-                        // Cerrar la ventana de la taquilla después de la compra
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo completar la compra. Inténtalo de nuevo.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "La cola de ingreso está llena. Por favor, espere su turno.");
-                }
-            }
-        });
     }
 
     private JPanel createTheaterPanel() {
@@ -171,35 +145,31 @@ public class EventTicketCounter extends JFrame {
         return theaterPanel;
     }
     
-
-    private boolean checkQueueCapacity() {
-        // Utilizar un semáforo para controlar el acceso a la cola de ingreso
-        Semaphore semaphore = new Semaphore(3); // Permitir hasta 3 clientes simultáneamente
-        try {
-            semaphore.acquire(); // Intentar adquirir un permiso del semáforo
-            // Permitir al cliente continuar con la compra
-            return true;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            semaphore.release(); // Liberar el permiso adquirido
-        }
+    
+    public String getEventName() {
+        return eventName;
     }
 
-    private boolean purchaseTickets(int quantity, String seatType) {
-        // Simular la generación de boletos electrónicos con el tipo de asiento
-        try {
-            for (int i = 0; i < quantity; i++) {
-                String fileName = "ticket_" + i + "_" + seatType + ".pdf";
-                System.out.println("Boleto electrónico generado: " + fileName);
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public JLabel getTitleLabel() {
+        return titleLabel;
     }
+
+    public JLabel getAvailabilityLabel() {
+        return availabilityLabel;
+    }
+
+    public JTextField getQuantityField() {
+        return quantityField;
+    }
+
+    public JComboBox<String> getSeatTypeComboBox() {
+        return seatTypeComboBox;
+    }
+
+    public JButton getBuyButton() {
+        return buyButton;
+    }
+
     // Método main para ejemplo de uso
     public static void main(String[] args) {
         EventTicketCounter ticketCounter = new EventTicketCounter("Concierto de Jazz");
