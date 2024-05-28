@@ -7,6 +7,15 @@ public class PaymentInterface extends JFrame {
     private JRadioButton creditCardRadioButton;
     private JRadioButton cashRadioButton;
     private JTextField cardNumberField;
+    private static PaymentInterface instancia;
+
+
+    public static PaymentInterface getInstance() {
+        if (instancia == null) {
+            instancia = new PaymentInterface();
+        }
+        return instancia;
+    }
 
     public PaymentInterface() {
         setTitle("Método de Pago");
