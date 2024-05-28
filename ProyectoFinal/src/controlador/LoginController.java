@@ -59,7 +59,8 @@ public class LoginController {
                 });
                 return; // Terminar la ejecución del método si los campos están vacíos
             }
-
+            
+            // For que recorre todos los usuarios 
             boolean loginExitoso = false;
             for (Usuarios usuario : listaUsuarios) {
                 if (usuario.getCorreo().equals(email) && Arrays.equals(usuario.getContrasena().toCharArray(), password)) {
@@ -109,6 +110,7 @@ public class LoginController {
         registerForm.setVisible(true);
     }
 
+    //Metodo para agregar un nuevo usuario a la lista de usuarios
     public void addUsuario(Usuarios usuario) {
         if (!usuarioExiste(usuario.getCorreo())) {
             listaUsuarios.add(usuario);
@@ -123,6 +125,7 @@ public class LoginController {
         }
     }
 
+    //Verificar si existe el usuario
     public boolean usuarioExiste(String correo) {
         for (Usuarios usuario : listaUsuarios) {
             if (usuario.getCorreo().equals(correo)) {
