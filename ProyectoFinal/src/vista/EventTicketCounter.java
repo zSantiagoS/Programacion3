@@ -102,8 +102,12 @@ public class EventTicketCounter extends JFrame {
                     String seatType = (String) seatTypeComboBox.getSelectedItem();
                     // Simular una compra exitosa
                     if (purchaseTickets(quantity, seatType)) {
-                        JOptionPane.showMessageDialog(null, "Compra exitosa. Se han generado los boletos electrónicos.");
-                        dispose(); // Cerrar la ventana después de la compra
+                        // Mostrar la interfaz de pago
+                        PaymentInterface paymentInterface = new PaymentInterface();
+                        paymentInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        paymentInterface.setVisible(true);
+                        // Cerrar la ventana de la taquilla después de la compra
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "No se pudo completar la compra. Inténtalo de nuevo.");
                     }
@@ -221,9 +225,8 @@ public class EventTicketCounter extends JFrame {
             return false;
         }
     }
-
+    // Método main para ejemplo de uso
     public static void main(String[] args) {
-        // Ejemplo de uso
         EventTicketCounter ticketCounter = new EventTicketCounter("Concierto de Jazz");
         ticketCounter.setVisible(true);
     }
