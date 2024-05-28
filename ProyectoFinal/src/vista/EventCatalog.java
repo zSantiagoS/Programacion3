@@ -78,18 +78,3 @@ public class EventCatalog extends JFrame {
     }
 }
 
-class EventTicketCounter extends JFrame {
-    public EventTicketCounter(String eventName) {
-        setTitle("Taquilla - " + eventName);
-        setSize(400, 200);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        JLabel label = new JLabel("Comprar boletas para: " + eventName);
-        label.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-
-        add(label, BorderLayout.CENTER);
-    }
-}
-
