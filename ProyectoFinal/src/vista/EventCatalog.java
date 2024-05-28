@@ -11,6 +11,7 @@ public class EventCatalog extends JFrame {
     private Persistencia p;
     private static EventCatalog instancia;
     private Usuarios usuario;
+    private controlProcesoCompra controlProcesoCompra;
 
     public static EventCatalog getInstance(Usuarios usuario) {
         if (instancia == null) {
@@ -71,7 +72,7 @@ public class EventCatalog extends JFrame {
                     String lugar = "Lugar";
                     ArrayList<String> artistas = (ArrayList<String>) eventTable.getValueAt(selectedRow, 3);
                     Eventos evento = new Eventos(eventName, fecha, artistas);
-                    openTicketCounter(eventName);
+                    new controlProcesoCompra(evento, null, usuario);
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor selecciona un evento.");
                 }
@@ -89,13 +90,6 @@ public class EventCatalog extends JFrame {
         tableModel.addRow(new Object[]{"Locos del barrio", "2023-08-15", "Mis patas", "Banda 121321"});*/
 
     }
-
-    private void openTicketCounter(String eventName) {
-        // Abrir la taquilla virtual para el evento seleccionado
-        EventTicketCounter ticketCounter = new EventTicketCounter(eventName);
-        ticketCounter.setVisible(true);
-    }
-
     
 
     public JTable getEventTable() {
