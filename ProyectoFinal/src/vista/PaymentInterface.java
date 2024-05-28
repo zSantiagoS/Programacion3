@@ -10,7 +10,7 @@ public class PaymentInterface extends JFrame {
     private JTextField totalCostField;
 
 
-    public PaymentInterface(Double pagoTotal) {
+    public PaymentInterface(String pagoTotal) {
         setTitle("Método de Pago");
         setSize(400, 300); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class PaymentInterface extends JFrame {
         totalCostField.setFont(new Font("Arial", Font.PLAIN, 16));
         totalCostField.setEditable(false); 
         totalCostField.setBackground(Color.WHITE); 
-        totalCostField.setText("$50.00"); // Ejemplo de costo total
+        totalCostField.setText(pagoTotal); // Ejemplo de costo total
 
         payButton = new JButton("Pagar");
         payButton.setFont(new Font("Arial", Font.BOLD, 16));
