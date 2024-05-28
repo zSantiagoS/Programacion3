@@ -7,18 +7,10 @@ public class PaymentInterface extends JFrame {
     private JRadioButton creditCardRadioButton;
     private JRadioButton cashRadioButton;
     private JTextField cardNumberField;
-    private static PaymentInterface instancia;
     private JTextField totalCostField;
 
 
-    public static PaymentInterface getInstance() {
-        if (instancia == null) {
-            instancia = new PaymentInterface();
-        }
-        return instancia;
-    }
-
-    public PaymentInterface() {
+    public PaymentInterface(Double pagoTotal) {
         setTitle("Método de Pago");
         setSize(400, 300); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -113,19 +105,4 @@ public class PaymentInterface extends JFrame {
         add(panel);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    // Usa el aspecto y la sensación del sistema
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
-                PaymentInterface paymentInterface = new PaymentInterface();
-                paymentInterface.setVisible(true);
-            }
-        });
-    }
 }
