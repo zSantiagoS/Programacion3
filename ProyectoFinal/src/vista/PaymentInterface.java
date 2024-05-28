@@ -8,6 +8,7 @@ public class PaymentInterface extends JFrame {
     private JRadioButton cashRadioButton;
     private JTextField cardNumberField;
     private static PaymentInterface instancia;
+    private JTextField totalCostField;
 
 
     public static PaymentInterface getInstance() {
@@ -19,7 +20,7 @@ public class PaymentInterface extends JFrame {
 
     public PaymentInterface() {
         setTitle("Método de Pago");
-        setSize(400, 250);
+        setSize(400, 300); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,6 +45,12 @@ public class PaymentInterface extends JFrame {
         cardNumberField = new JTextField(15);
         cardNumberField.setFont(new Font("Arial", Font.PLAIN, 16));
         cardNumberField.setEnabled(false);
+
+        totalCostField = new JTextField(15); 
+        totalCostField.setFont(new Font("Arial", Font.PLAIN, 16));
+        totalCostField.setEditable(false); 
+        totalCostField.setBackground(Color.WHITE); 
+        totalCostField.setText("$50.00"); // Ejemplo de costo total
 
         payButton = new JButton("Pagar");
         payButton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -70,6 +77,12 @@ public class PaymentInterface extends JFrame {
         gbc.gridy++;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(cardNumberField, gbc);
+
+        gbc.gridy++;
+        panel.add(new JLabel("Costo total:"), gbc); // Nuevo campo para mostrar el costo total
+
+        gbc.gridy++;
+        panel.add(totalCostField, gbc); 
 
         gbc.gridy++;
         panel.add(payButton, gbc);

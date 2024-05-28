@@ -59,20 +59,25 @@ public class EventCatalog extends JFrame {
                     JOptionPane.showMessageDialog(null, "Por favor selecciona un evento.");
                 }
             }
-
-            private void openTicketCounter(String eventName) {
-                EventTicketCounter eventTicketCounter = new EventTicketCounter(eventName);
-                eventTicketCounter.setVisible(true);
-            }
         });
 
         // Agregar algunos datos de ejemplo
         tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ"});
         tableModel.addRow(new Object[]{"Festival de Jazz", "2023-09-10", "Auditorio Nacional", "Artista ABC"});
+        tableModel.addRow(new Object[]{"Locos del barrio", "2023-08-15", "Mis patas", "Banda 121321"});
+
     }
 
-    
+    private void openTicketCounter(String eventName) {
+        // Abrir la taquilla virtual para el evento seleccionado
+        EventTicketCounter ticketCounter = new EventTicketCounter(eventName);
+        ticketCounter.setVisible(true);
+    }
 
+    public static void main(String[] args) {
+        EventCatalog catalog = new EventCatalog();
+        catalog.setVisible(true);
+    }
 }
 
 
