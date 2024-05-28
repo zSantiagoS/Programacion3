@@ -44,12 +44,13 @@ public class RegistroEventoController {
 
     public boolean eventoExiste(String nombre) {
         for (Eventos evento : listaEventos) {
-            if (evento.getNombreEvento().equals(nombre)) {
+            if (nombre != null && nombre.equals(evento.getNombreEvento())) {
                 return true;
             }
         }
         return false;
     }
+    
 
     public ArrayList<Eventos> getListaEventos() {
         return listaEventos;

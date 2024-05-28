@@ -37,24 +37,24 @@ public class Persistencia {
 
    
     @SuppressWarnings("unchecked")
-    public ArrayList<Eventos> leerArchivoEventos() {
-        ArrayList<Eventos> listaEventos = new ArrayList<>();
-        File eventosFile = new File("BASE_EVENTOS.xml");
-        
-        if (eventosFile.exists() && eventosFile.isFile()) {
-            try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(eventosFile)))) {
-                listaEventos = (ArrayList<Eventos>) decoder.readObject();
-            } catch (FileNotFoundException e) {
-                System.err.println("El archivo BASE_EVENTOS.xml no existe todavía.");
-            } catch (Exception e) {
-                System.err.println("Error al leer el archivo BASE_EVENTOS.xml: " + e.getMessage());
-            }
-        } else {
-            System.err.println("El archivo BASE_EVENTOS.xml está vacío o no existe.");
+public ArrayList<Eventos> leerArchivoEventos() {
+    ArrayList<Eventos> listaEventos = new ArrayList<>();
+    File eventosFile = new File("BASE_EVENTOS.xml");
+    
+    if (eventosFile.exists() && eventosFile.isFile()) {
+        try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(eventosFile)))) {
+            listaEventos = (ArrayList<Eventos>) decoder.readObject();
+        } catch (FileNotFoundException e) {
+            System.err.println("El archivo BASE_EVENTOS.xml no existe todavía.");
+        } catch (Exception e) {
+            System.err.println("Error al leer el archivo BASE_EVENTOS.xml: " + e.getMessage());
         }
-        
-        return listaEventos;
+    } else {
+        System.err.println("El archivo BASE_EVENTOS.xml está vacío o no existe.");
     }
+    
+    return listaEventos;
+}
 
     public void escribirArchivoEventos(List<Eventos> listaEventos) {
         try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("BASE_EVENTOS.xml")))) {

@@ -3,12 +3,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class EventCatalog extends JFrame {
     private JTable eventTable;
     private DefaultTableModel tableModel;
+    private Persistencia p;
 
     public EventCatalog() {
+        p = Persistencia.getInstance();
         setTitle("Catálogo de Eventos");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,10 +64,15 @@ public class EventCatalog extends JFrame {
             }
         });
 
+        ArrayList<Eventos> eventos = p.leerArchivoEventos();
+        for (Eventos evento : eventos) {
+            // Puedes modificar cómo se muestra cada evento en la tabla según tus necesidades
+            tableModel.addRow(new Object[]{evento.getNombreEvento(), evento.getFechaEvento(), "Lugar", evento.getArtistas()});
+        }
         // Agregar algunos datos de ejemplo
-        tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ"});
+        /*tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ"});
         tableModel.addRow(new Object[]{"Festival de Jazz", "2023-09-10", "Auditorio Nacional", "Artista ABC"});
-        tableModel.addRow(new Object[]{"Locos del barrio", "2023-08-15", "Mis patas", "Banda 121321"});
+        tableModel.addRow(new Object[]{"Locos del barrio", "2023-08-15", "Mis patas", "Banda 121321"});*/
 
     }
 

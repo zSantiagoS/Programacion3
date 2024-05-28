@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class RegisterEventView extends JFrame {
+public class OpenTaquillaView extends JFrame {
 
-    public RegisterEventView() {
-        setTitle("Registrar Evento");
-        setSize(400, 250);
+    public OpenTaquillaView() {
+        setTitle("Abrir Taquilla");
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -15,52 +16,81 @@ public class RegisterEventView extends JFrame {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel titleLabel = new JLabel("Registrar Nuevo Evento");
+        JLabel titleLabel = new JLabel("Abrir Taquilla para Evento");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         panel.add(titleLabel, gbc);
 
-        JLabel eventLabel = new JLabel("Nombre del Evento:");
+        // Simulación de lista de eventos disponibles
+        ArrayList<String> eventos = new ArrayList<>();
+        eventos.add("Evento 1");
+        eventos.add("Evento 2");
+        eventos.add("Evento 3");
+
+        JComboBox<String> eventosComboBox = new JComboBox<>(eventos.toArray(new String[0]));
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        panel.add(eventLabel, gbc);
+        gbc.gridwidth = 2;
+        panel.add(eventosComboBox, gbc);
 
-        JTextField eventField = new JTextField(20);
-        gbc.gridx = 1;
-        panel.add(eventField, gbc);
-
-        JLabel locationLabel = new JLabel("Localización:");
+        JLabel bronzeLabel = new JLabel("Bronce:");
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        panel.add(locationLabel, gbc);
+        panel.add(bronzeLabel, gbc);
 
-        JTextField locationField = new JTextField(20);
+        JTextField bronzeField = new JTextField(10);
         gbc.gridx = 1;
-        panel.add(locationField, gbc);
+        panel.add(bronzeField, gbc);
 
-        JLabel artistLabel = new JLabel("Nombre del Artista:");
+        JLabel silverLabel = new JLabel("Plata:");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
-        panel.add(artistLabel, gbc);
+        panel.add(silverLabel, gbc);
 
-        JTextField artistField = new JTextField(20);
+        JTextField silverField = new JTextField(10);
         gbc.gridx = 1;
-        panel.add(artistField, gbc);
+        panel.add(silverField, gbc);
 
-        JButton registerButton = new JButton("Registrar");
-        registerButton.setBackground(new Color(33, 150, 243));
-        registerButton.setForeground(Color.WHITE);
+        JLabel goldLabel = new JLabel("Oro:");
         gbc.gridx = 0;
         gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        panel.add(goldLabel, gbc);
+
+        JTextField goldField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(goldField, gbc);
+
+        JLabel timeLabel = new JLabel("Hora de Apertura:");
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 1;
+        panel.add(timeLabel, gbc);
+
+        JTextField timeField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(timeField, gbc);
+
+        JButton openButton = new JButton("Abrir Taquilla");
+        openButton.setBackground(new Color(33, 150, 243));
+        openButton.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
-        panel.add(registerButton, gbc);
+        panel.add(openButton, gbc);
 
         add(panel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            OpenTaquillaView frame = new OpenTaquillaView();
+            frame.setVisible(true);
+        });
     }
 }
