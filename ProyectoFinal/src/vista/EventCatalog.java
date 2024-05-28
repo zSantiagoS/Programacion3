@@ -10,17 +10,16 @@ public class EventCatalog extends JFrame {
     private DefaultTableModel tableModel;
     private Persistencia p;
     private static EventCatalog instancia;
-    private EventClient client;
     private Usuarios usuario;
 
-    public static EventCatalog getInstance(EventClient client, Usuarios usuario) {
+    public static EventCatalog getInstance(Usuarios usuario) {
         if (instancia == null) {
-            instancia = new EventCatalog(client, usuario);
+            instancia = new EventCatalog(usuario);
         }
         return instancia;
     }
 
-    public EventCatalog(EventClient client, Usuarios usuario) {
+    public EventCatalog(Usuarios usuario) {
         p = Persistencia.getInstance();
         setTitle("Catálogo de Eventos");
         setSize(800, 500);
