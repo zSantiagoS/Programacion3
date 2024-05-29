@@ -6,10 +6,12 @@ import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class RegisterEventView extends JFrame {
 
     private RegistroEventoController registroEventoController;
     private JTextField eventField;
+    private JTextField locacion;
     private JTextField dateField;
     private JTextField categoryField;
     private JButton addCategoryButton;
@@ -47,6 +49,16 @@ public class RegisterEventView extends JFrame {
         gbc.gridx = 1;
         panel.add(eventField, gbc);
 
+        JLabel locacionLabel = new JLabel("Lugar del evento");
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        panel.add(locacionLabel, gbc);
+
+        locacion = new JTextField(20);
+        gbc.gridx = 1;
+        panel.add(locacion, gbc);
+
         JLabel dateLabel = new JLabel("Fecha:");
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -67,10 +79,10 @@ public class RegisterEventView extends JFrame {
 
         JLabel categoryLabel = new JLabel("Artistas:");
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         panel.add(categoryLabel, gbc);
 
-        categoryField = new JTextField(15);
+        categoryField = new JTextField(25);
         gbc.gridx = 1;
         panel.add(categoryField, gbc);
 
@@ -91,8 +103,8 @@ public class RegisterEventView extends JFrame {
         categoryList = new JList<>(categoryListModel);
         categoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
+        gbc.gridy = 5;
+        gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weighty = 1.0;
         JScrollPane scrollPane = new JScrollPane(categoryList);
@@ -102,7 +114,7 @@ public class RegisterEventView extends JFrame {
         registerButton.setBackground(new Color(33, 150, 243));
         registerButton.setForeground(Color.WHITE);
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -116,12 +128,13 @@ public class RegisterEventView extends JFrame {
                 String nombre = eventField.getText();
                 String fecha = dateField.getText();
                 ArrayList<String> listaArtistas = new ArrayList<>();
+                String lugar = locacion.getText();
 
                 for (int i = 0; i < categoryList.getModel().getSize(); i++) {
                     listaArtistas.add(categoryList.getModel().getElementAt(i));
                 }
 
-                Eventos evento= new Eventos(nombre, fecha, listaArtistas);
+                Eventos evento= new Eventos(nombre, fecha, listaArtistas, lugar);
                 registroEventoController.addEvento(evento);
 
                 dispose();
@@ -132,6 +145,10 @@ public class RegisterEventView extends JFrame {
 
     public JTextField getEventField() {
         return eventField;
+    }
+
+    public JTextField getLocacion() {
+        return locacion;
     }
 
     public JTextField getDateField() {

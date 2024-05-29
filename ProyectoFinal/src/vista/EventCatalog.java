@@ -69,9 +69,10 @@ public class EventCatalog extends JFrame {
 
                     String eventName = (String) eventTable.getValueAt(selectedRow, 0);
                     String fecha = (String) eventTable.getValueAt(selectedRow, 1);
-                    String lugar = "Lugar";
+                    String lugar = (String)eventTable.getValueAt(selectedRow, 2);
+                    @SuppressWarnings("unchecked")
                     ArrayList<String> artistas = (ArrayList<String>) eventTable.getValueAt(selectedRow, 3);
-                    Eventos evento = new Eventos(eventName, fecha, artistas);
+                    Eventos evento = new Eventos(eventName, fecha, artistas, lugar);
                     new controlProcesoCompra(evento, null, usuario);
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor selecciona un evento.");
@@ -82,7 +83,7 @@ public class EventCatalog extends JFrame {
         ArrayList<Eventos> eventos = p.leerArchivoEventos();
         for (Eventos evento : eventos) {
             // Puedes modificar cómo se muestra cada evento en la tabla según tus necesidades
-            tableModel.addRow(new Object[]{evento.getNombreEvento(), evento.getFechaEvento(), "Lugar", evento.getArtistas()});
+            tableModel.addRow(new Object[]{(String)evento.getNombreEvento(), evento.getFechaEvento(), (String)evento.getLugar() , evento.getArtistas()});
         }
         // Agregar algunos datos de ejemplo
         /*tableModel.addRow(new Object[]{"Concierto Rock", "2023-08-15", "Estadio Central", "Banda XYZ"});

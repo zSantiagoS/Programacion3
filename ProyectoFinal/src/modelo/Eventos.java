@@ -8,7 +8,7 @@ public class Eventos implements Serializable {
     private static final long serialVersionUID = 1L;
     private String nombreEvento;
     private String fechaEvento;
-    private Locaciones lugar;
+    private String lugar;
     private ArrayList<String> artistas;
     private ArrayList<Boletas> boletas;
 
@@ -16,13 +16,14 @@ public class Eventos implements Serializable {
     public Eventos() {
     }
     
-    public Eventos(String nombreEvento, String fechaEvento, ArrayList<String> artistas) {
+    public Eventos(String nombreEvento, String fechaEvento, ArrayList<String> artistas, String lugar) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
         this.artistas = artistas;
+        this.lugar = lugar;
     }
 
-    public Eventos(String nombreEvento, String fechaEvento, Locaciones lugar, ArrayList<String> artistas,
+    public Eventos(String nombreEvento, String fechaEvento, String lugar, ArrayList<String> artistas,
     ArrayList<Boletas> boletas) {
         this.nombreEvento = nombreEvento;
         this.fechaEvento = fechaEvento;
@@ -39,7 +40,7 @@ public class Eventos implements Serializable {
         return fechaEvento;
     }
 
-    public Locaciones getLugar() {
+    public String getLugar() {
         return lugar;
     }
 
