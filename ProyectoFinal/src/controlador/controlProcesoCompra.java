@@ -23,47 +23,40 @@ public class controlProcesoCompra {
         this.semaphoreEventos = semaphoreEventos;
         this.usuario = usuario;
 
-        //Abrir ventana de seleccion de tiquetes
+        // Abrir ventana de seleccion de tiquetes
         this.eventCounter.setVisible(true);
 
+
+        
         // Configurar el botón de compra en EventTicketCounter
         this.eventCounter.getBuyButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Verifica si hay semaforos de hilo disponible
-                if (semaphoreEventos.availablePermits() > 0) {
-                    // Verifica si esos semaforos se puede adquirir
-                    if (semaphoreEventos.tryAcquire()) {
-                        botonCompraPresionado();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "La cola de ingreso está llena. Por favor, espere su turno.");
-                    }
-                }
+                System.out.println("paso");
+                botonCompraPresionado();
             }
         });
 
     }
 
-    public void botonCompraPresionado(){
-        //Obtener los datos ingresados por el panel
+    public void botonCompraPresionado() {
+        // Obtener los datos ingresados por el panel
         int cantidadBoletas = Integer.parseInt(eventCounter.getQuantityField().getText());
-        Categorias categoria = (Categorias) eventCounter.getSeatTypeComboBox().getSelectedItem();
-        
+        String nomCategoria = (String) eventCounter.getSeatTypeComboBox().getSelectedItem();
+
+        Categorias categoria = Categorias.valueOf(nomCategoria.toUpperCase());
+        System.out.println(categoria);
+
         procesoCompra procesoCompra = new procesoCompra(evento, cantidadBoletas, null, categoria, usuario);
 
-        Double costoTotal =  procesoCompra.pagarTotal();
+        Double costoTotal = 32.50;
 
         String stringCostoTotal = String.valueOf(costoTotal);
 
-        //Abrir la ventana de pago
+        // Abrir la ventana de pago
         paymentInterface = new PaymentInterface(stringCostoTotal);
         paymentInterface.setVisible(true);
 
-
-
-        
     }
 
 }
